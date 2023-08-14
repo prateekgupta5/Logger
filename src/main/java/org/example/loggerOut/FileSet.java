@@ -8,13 +8,15 @@ public class FileSet {
     public FileSet (String name) throws IOException {
         this.name = name;
 
-        dir = new File(DEFAULT_DIR + name);
+        dir = new File(DEFAULT_DIR + File.separator + name);
 
         if (dir.mkdir()) { //if it doesn't exist, numFiles = 0
-            File setData = new File(dir.getPath() + ".SetData.txt");
+            System.out.println("dir.getPath() = " + dir.getPath());
+            File setData = new File(dir.getPath() + File.separator + "SetData" + ".txt");
             numFiles = 0;
         } else { //otherwise numFiles = the number of files
-            File setData = new File(dir.getPath() + ".SetData.txt");
+            File setData = new File(dir.getPath() + File.separator + "SetData.txt");
+            System.out.println("setData.getPath() = " + setData.getPath());
             BufferedReader reader = new BufferedReader(new FileReader(setData));
             numFiles = Integer.parseInt(reader.readLine());
         }
@@ -30,12 +32,14 @@ public class FileSet {
     public File getNewEntry () throws IOException {
         ++numFiles;
         updateSetData();
-        return new File(dir.getPath() + "entry_" + (numFiles-1) + ".txt");
+        return new File(dir.getPath() + File.separator + "entry_" + (numFiles-1) + ".txt");
     }
 
     public void updateSetData () throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(dir.getPath() + ".SetData.txt"));
+        System.out.println("updated setdata: " + String.valueOf(numFiles));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(dir.getPath() + File.separator + "SetData.txt"));
         writer.write(String.valueOf(numFiles) + "\n");
+        writer.flush();
     }
 
     public int getNumFiles () {

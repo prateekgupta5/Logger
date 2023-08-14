@@ -16,9 +16,7 @@ public class LoggerManager {
         loggers = new HashMap<>();
         louts   = new HashMap<>();
 
-        if (new File(DEFAULT_DIR).mkdir() ) { //if the default directory does not exist, create it and the default file
-            ;
-        }
+        new File(DEFAULT_DIR).mkdir(); //if the default directory does not exist, create it and the default file
     }
     HashMap<String, AbstractLogger> loggers;
     public HashMap<String, LoggerFileOut> louts;

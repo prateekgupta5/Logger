@@ -1,8 +1,10 @@
 package org.example.util;
 
-public class DefaultFile {
-    public static final String DEFAULT_DIR  = "C:\\Users\\prate\\IdeaProjects\\Logger\\src\\main\\java\\org\\example\\logs"; //TODO: set filepath
+import java.io.File;
 
-    public static final String DEFAULT_FILE = DEFAULT_DIR + "\\StdLog.txt"; //TODO: set filepath
+public class DefaultFile {
+    public static final String DEFAULT_DIR  = "C:" + File.separator + "Users" + File.separator + "prate" + File.separator + "IdeaProjects" + File.separator + "Logger" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "org" + File.separator + "example" + File.separator + "logs"; //TODO: set filepath
+
+    public static final String DEFAULT_FILE = DEFAULT_DIR + File.separator + "StdLog.txt"; //TODO: set filepath
 
 }
