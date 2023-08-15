@@ -13,7 +13,11 @@ import static org.example.util.DefaultFile.DEFAULT_FILE;
 
 public class Main {
     static LoggerManager loggers;
-    static ManualLogger<String> logger;
+    static ManualLogger<String> logger1;
+    static ManualLogger<String> logger2;
+
+    static ManualLogger<String> loggerDefault;
+
     static FileSet fileSet;
 
     public static void main(String[] args) throws IOException {
@@ -21,19 +25,31 @@ public class Main {
 
         loggers = new LoggerManager();
 
-        logger = new ManualLogger<>(new LoggerBuilder(null, "test", fileSet.getNewEntry().getAbsolutePath(), null)
+        String filepath = fileSet.getNewEntry().getAbsolutePath();
+
+        logger1 = new ManualLogger<>(new LoggerBuilder(null, "test1", filepath, null)
                 .averageTimePerLog()
                 .build()
         );
 
-        System.out.println("logger = " + logger == null);
+        logger2 = new ManualLogger<>(new LoggerBuilder(null, "test2", filepath, null)
+                .averageTimePerLog()
+                .build()
+        );
 
-        loggers.add(logger);
+        loggerDefault = new ManualLogger<>(new LoggerBuilder(null, "testDefault", null, null)
+                .averageTimePerLog()
+                .build()
+        );
+
+        loggers.add(logger1);
+        loggers.add(logger2);
+        loggers.add(loggerDefault);
         loggers.activateAll();
 
         System.out.println("louts for default file: " + loggers.louts.get(DEFAULT_FILE));
-        logger.log("0");
-        logger.log("1");
+        logger1.log("0");
+        logger1.log("1");
 
         loggers.storeLogs();
     }

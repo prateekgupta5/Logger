@@ -10,7 +10,7 @@ public class FileSet {
 
         dir = new File(DEFAULT_DIR + File.separator + name);
 
-        if (dir.mkdir()) { //if it doesn't exist, numFiles = 0
+        if (dir.mkdirs()) { //if it doesn't exist, numFiles = 0
             System.out.println("dir.getPath() = " + dir.getPath());
             File setData = new File(dir.getPath() + File.separator + "SetData" + ".txt");
             numFiles = 0;
